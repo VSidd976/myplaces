@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Додати нове місце{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <h2>Додати нове місце</h2>
+
+    <form action="{% url 'places:add' %}" method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error-msg">{{ field.errors.0 }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <input type="submit" value="Зберегти" class="btn btn-primary">
+            <a href="{% url 'places:list' %}" class="btn btn-secondary">Назад</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
