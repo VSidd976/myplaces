@@ -5,8 +5,6 @@ from .forms import PlaceForm
 from datetime import datetime
 import random
 
-# Create your views here.
-
 def home(request):
     if 'places' not in request.session:
         request.session['places'] = []
