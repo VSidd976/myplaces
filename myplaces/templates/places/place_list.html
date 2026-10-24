@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Усі місця{% endblock %}
+
+{% block content %}
+<div class="page-title-row">
+    <h2>Ваші улюблені місця</h2>
+    <a href="{% url 'places:add' %}" class="btn btn-secondary">+ Додати місце</a>
+</div>
+
+{% if places %}
+    <div class="grid">
+        {% for place in places %}
+            {% include "places/_place_card.html" with place=place %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty-text">Список наразі порожній. <a href="{% url 'places:add' %}">Додати нове місце</a></p>
+{% endif %}
+{% endblock %}

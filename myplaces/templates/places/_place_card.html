@@ -1,0 +1,31 @@
+{% load static %}
+<div class="card">
+    <img src="{% static 'images/default_place.png' %}" alt="{{ place.title }}" class="card-img">
+    <div class="card-body">
+        <h3 class="card-title">
+            <a href="{% url 'places:detail' place.id %}">{{ place.title }}</a>
+        </h3>
+        <span class="badge">{{ place.place_type }}</span>
+
+        <p class="location">
+            📍 
+            {% if place.location %}
+                {{ place.location }}
+            {% else %}
+                <strong>Secret place👀</strong>
+            {% endif %}
+        </p>
+
+        <p class="rating">
+            Рейтинг: 
+            {% for _ in "x"|rjust:place.rating %}★{% endfor %}
+            <span>({{ place.rating }}/5)</span>
+        </p>
+
+        <p class="desc-preview">
+            {{ place.description|truncatewords:6 }}
+        </p>
+
+        <small class="date">Додано: {{ place.created_at }}</small>
+    </div>
+</div>

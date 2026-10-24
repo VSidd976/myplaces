@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Головна — WhereToGo{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Куди піти сьогодні?</h1>
+    <p class="lead">
+        Ваш персональний каталог улюблених закладів. Переглядайте свої збережені локації
+        або довіртесь рандому з урахуванням оцінки місць!
+    </p>
+
+    {% if has_places %}
+        <form method="get" action="{% url 'places:home' %}">
+            <input type="hidden" name="pick_random" value="1">
+            <button type="submit" class="btn btn-primary">🎲 Куди піти сьогодні?</button>
+        </form>
+    {% else %}
+        <p class="alert-info">
+            У вашому списку ще немає жодного місця. 
+            <a href="{% url 'places:add' %}">Додайте своє перше місце!</a>
+        </p>
+    {% endif %}
+</div>
+
+{% if random_place %}
+    <div class="suggestion-block">
+        <h2>🎉 Рекомендація на сьогодні:</h2>
+        <div class="single-card">
+            {% include "places/_place_card.html" with place=random_place %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
